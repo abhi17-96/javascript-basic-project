@@ -10,8 +10,16 @@ btn.addEventListener('click', function() {
     document.body.style.backgroundColor = colors[randomNumber];
     color.innerHTML = colors[randomNumber];
 })
-
+let curr = -1;
 
 function getRandomNumber() {
-    return Math.floor(Math.random() * colors.length) ;
+    let newr;
+  
+    do {
+      newr = Math.floor(Math.random() * colors.length);
+    } while (newr === curr);
+    
+    curr = newr; // Update curr to the new random number
+    
+    return newr;
 }
