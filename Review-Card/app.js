@@ -73,7 +73,20 @@ prevBtn.addEventListener('click', function() {
 })
 
 randomBtn.addEventListener('click' , function() {
-  currentItem = Math.floor(Math.random() * reviews.length);
-  showPerson(currentItem);
+  showPerson(getRandomNumber());
 }
 )
+
+
+
+function getRandomNumber() {
+    let newr;
+  
+    do {
+      newr = Math.floor(Math.random() * reviews.length);
+    } while (newr === currentItem);
+    
+    currentItem = newr; // Update curr to the new random number
+    
+    return newr;
+}
