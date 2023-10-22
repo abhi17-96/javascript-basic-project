@@ -71,4 +71,93 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "steaks dinner",
+    category: "dinner",
+    price: 29.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
+
+const sectionCenter = document.querySelector('.section-center');
+
+const btnContainer = document.querySelector('.btn-container');
+
+// load items
+window.addEventListener('DOMContentLoaded', function() {
+  displayMenuItem(menu);
+
+  displayMenuBtns();
+
+});
+
+// filter items
+
+
+
+
+
+
+
+
+
+function displayMenuItem(menuItem) {
+   
+  let displayMenu = menuItem.map(function(item) {
+
+    return `<article class="menu-item">
+    <img src=${item.img} class="photo" alt=${item.title} />
+    <div class="item-info">
+      <header>
+        <h4>${item.title}</h4>
+        <h4 class="price">$${item.price}</h4>
+      </header>
+      <p class="item-text">
+        ${item.desc}
+      </p>
+    </div>
+  </article>`;
+  });
+  displayMenu = displayMenu.join("");
+sectionCenter.innerHTML = displayMenu;
+}
+
+function displayMenuBtns() {
+// buttons added dynamically
+  const categories = menu.reduce((acc,item) => {
+    if(!acc.includes(item.category)) {
+      acc.push(item.category);
+    }
+    return acc;
+  },["all"]
+  );
+const categoryBtns = categories.map((item) => {
+  return `<button class="filter-btn" type="button" data-id=${item}>${item}</button>`
+}).join("");
+btnContainer.innerHTML = categoryBtns;
+const filterBtns = document.querySelectorAll('.filter-btn');
+// end - buttons added dynamically
+
+// after dom loads dynamic content then only we can filter 
+filterBtns.forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    const category = e.currentTarget.dataset.id;
+    // filtered menu array
+    const menuCategory = menu.filter((item) => {
+      if(item.category === category) {
+        return item;
+      }   
+    });
+    if(category === 'all') {
+      displayMenuItem(menu);
+    }
+    else {
+      displayMenuItem(menuCategory);
+
+    }
+  });
+});
+
+}
