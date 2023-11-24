@@ -260,6 +260,7 @@ nav {
 @media screen and (min-width: 800px) {
   nav {
     background: transparent;
+    /* transition: all 0.3s linear; */
   }
   .nav-center {
     width: 90vw;
